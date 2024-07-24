@@ -1,4 +1,5 @@
 # acr-qml-format
+Extensão para validar formatação de código QML por meio da ferramenta qmlformat
 
 Arquivo config.json
 
