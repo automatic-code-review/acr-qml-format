@@ -36,9 +36,7 @@ def __verificar_indentacao_arquivo(arquivo, config):
     comando = [config['command']] + config['arguments'] + [arquivo]
     
     resultado = subprocess.run(comando, capture_output=True, text=True)
-    isEqual = __comparar_formatacao(arquivo, resultado.stdout)
-    
-    return isEqual
+    return __comparar_formatacao(arquivo, resultado.stdout)
 
 
 def review(config): 
