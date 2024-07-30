@@ -5,11 +5,11 @@ Arquivo config.json
 
 ```json
 {
-    "stage": "static",
     "regexFile": ".*\\.qml",
     "regexIgnore": [
         ".*.qrc"
     ],
+    "message": "Indentação incorreta no arquivo ${FILE_PATH}",
     "qmlFormat": {
         "command": "/bin/qmlformat",
         "arguments": ["--normalize", "--objects-spacing", "--functions-spacing"]
