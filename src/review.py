@@ -43,22 +43,27 @@ def review(config):
     path_source = config['path_source']
     regex_file = config['regexFile']
     regex_ignore = config['regexIgnore']
-    qml_format = config['qmlFormat']
+    
 
     comments = []
 
-    for root, dirs, files in os.walk(path_source):
+    for root, _, files in os.walk(path_source):
         for file in files:
             file_path = os.path.join(root, file)
 
             if re.search(regex_file, file_path) and not __check_regex_ignore(regex_ignore, file):
+                qml_format = config['qmlFormat']
+                
                 if not __verificar_indentacao_arquivo(file_path, qml_format):
-                    path_relative = file_path.replace(path_source, "")[1:]
+                    relative_path = file_path.replace(path_source, "")[1:]
+                    descr_comment = config['message']
+                    descr_comment = descr_comment.replace("${FILE_PATH}", relative_path)
+                    
                     comments.append(
                         commons.comment_create(
                             comment_id=commons.comment_generate_id(file_path),
-                            comment_path=path_relative,
-                            comment_description=str(comment).format(FILE_PATH=file_path),
+                            comment_path=relative_path,
+                            comment_description=descr_comment,
                             comment_snipset=False,
                             comment_end_line=1,
                             comment_start_line=1,
