@@ -58,7 +58,7 @@ def review(config):
                         commons.comment_create(
                             comment_id=commons.comment_generate_id(file_path),
                             comment_path=path_relative,
-                            comment_description=f"Indentação incorreta no arquivo {path_relative}",
+                            comment_description=str(comment).format(FILE_PATH=file_path),
                             comment_snipset=False,
                             comment_end_line=1,
                             comment_start_line=1,
