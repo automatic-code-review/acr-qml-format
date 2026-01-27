@@ -9,7 +9,7 @@ Arquivo config.json
     "regexIgnore": [
         ".*.qrc"
     ],
-    "message": "Indentação incorreta no arquivo ${FILE_PATH}",
+    "message": "Indentação incorreta no arquivo ${FILE_PATH}.<br><br><br>```${FORMMATED_QML}```",
     "qmlFormat": {
         "command": "/bin/qmlformat",
         "arguments": ["--normalize", "--objects-spacing", "--functions-spacing"]
