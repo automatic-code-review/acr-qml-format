@@ -38,7 +38,8 @@ def __verificar_indentacao_arquivo(arquivo, config):
     comando = [config["command"]] + config["arguments"] + [arquivo]
 
     resultado = subprocess.run(comando, capture_output=True, text=True)
-    return __comparar_formatacao(arquivo, resultado.stdout)
+    formmated_qml = resultado.stdout
+    return __comparar_formatacao(arquivo, formmated_qml), formmated_qml
 
 
 def review(config):
@@ -57,10 +58,13 @@ def review(config):
             ):
                 qml_format = config["qmlFormat"]
 
-                if not __verificar_indentacao_arquivo(file_path, qml_format):
+                is_equals, formmated_qml =__verificar_indentacao_arquivo(file_path, qml_format)
+
+                if not is_equals:
                     relative_path = file_path.replace(path_source, "")[1:]
                     descr_comment = config["message"]
                     descr_comment = descr_comment.replace("${FILE_PATH}", relative_path)
+                    descr_comment = descr_comment.replace("${FORMMATED_QML}", formmated_qml)
 
                     comments.append(
                         commons.comment_create(
